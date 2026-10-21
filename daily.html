@@ -1,7 +1,42 @@
 <!doctype html>
-<html lang="ko">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:,"><title>센터 기본 일간표 · FOX LC</title><script src="./schedule.js" defer></script><script src="./app.js" defer></script>
-<style>
-*{box-sizing:border-box}body{margin:0;padding:28px 16px;background:#f5f6f2;color:#25332c;font:15px/1.6 "Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",system-ui,sans-serif}main{max-width:680px;margin:24px auto;padding:28px;background:white}h1{font-size:26px;line-height:1.3;margin:0 0 8px}p{margin:0 0 24px;color:#536256;font-size:13px}table{width:100%;border-collapse:collapse}th,td{padding:17px 12px;border-bottom:1px solid #d9e0d7;text-align:left;vertical-align:top}thead{font-size:13px;color:#536256}tbody th{width:145px;font-size:13px;font-weight:500;font-variant-numeric:tabular-nums}td{font-weight:600}small{display:block;font-size:12px;font-weight:400;color:#536256}.fixed-time{background:#fbf1d9}.class-time{background:#edf3e7}.activity{font-weight:600}.slot-mode{margin-top:6px}.unselected{font-weight:400}.note{margin:20px 0 0;font-size:12px}a{display:inline-block;margin-top:22px;color:#2f6046;font-size:13px;min-height:44px}:focus-visible{outline:3px solid #3e7854;outline-offset:3px}@media(max-width:500px){main{padding:22px 12px;margin:0 auto}h1{font-size:23px}th,td{padding:15px 9px}tbody th{width:108px}}@media print{body{padding:0;background:white}main{margin:0;max-width:none}a{display:none}.focus{print-color-adjust:exact}}
-</style></head>
-<body><main><h1>센터 기본 일간표</h1><p>화요일 편성안 · 동시 선택 운영 · 학생별 참여와 개설 그룹 수는 협의 중입니다.</p><table><thead><tr><th scope="col">시간</th><th scope="col">프로그램</th></tr></thead><tbody id="basic-daily-rows"></tbody></table><p class="note">활동별 대상·담당·공간은 협의 중입니다. 별도 개별지도는 집중시간 외 예약으로 편성하며 시간·담당은 미배정입니다. 날짜별 특별 프로그램은 전체 페이지의 달력에서 확인해 주세요.</p><a href="./index.html">전체 프로그램 보기 →</a></main></body></html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#2f6046"><meta name="description" content="2027년 겨울 방클 고정 블록 시간표. 시간과 활동을 직접 입력하고 하루·주간 일정으로 확인합니다."><title>2027년 겨울 방클 고정 블록 시간표 · FOX LC</title><link rel="icon" href="data:,"><link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="./timetable.css"><link rel="stylesheet" href="./current-app.css"><script src="./schedule.js" defer></script><script src="./timetable.js" defer></script><script src="./timetable-ui.js" defer></script><script src="./personal-timetable.js" defer></script><script src="./current-app.js" defer></script><script src="./shared-save.js" defer></script></head><body data-default-tab="day"><a class="skip-link" href="#main">본문으로 바로 가기</a><main id="main"><header class="site-header"><p class="site-brand"><strong>FOX LC</strong><span>겨울방학클래스</span></p></header><nav class="tabs" role="tablist" aria-label="방학클래스 보기"><button type="button" role="tab" id="week-tab" aria-controls="week" aria-selected="true">주간</button>
+<button type="button" role="tab" id="day-tab" aria-controls="day" aria-selected="false" tabindex="-1">하루 일정</button>
+<button type="button" role="tab" id="builder-tab" aria-controls="builder" aria-selected="false" tabindex="-1">아이별 Big 3</button>
+<button type="button" role="tab" id="programs-tab" aria-controls="programs" aria-selected="false" tabindex="-1">프로그램 예시</button>
+<button type="button" role="tab" id="intro-tab" aria-controls="intro" aria-selected="false" tabindex="-1">이번 방학클래스</button>
+<button type="button" role="tab" id="month-tab" aria-controls="month" aria-selected="false" tabindex="-1">월간</button>
+<button type="button" role="tab" id="operations-tab" aria-controls="operations" aria-selected="false" tabindex="-1">전체 프로그램표</button>
+<button type="button" role="tab" id="calendar-tab" aria-controls="calendar" aria-selected="false" tabindex="-1">달력</button></nav>
+<div id="timetable-savebar" class="current-savebar"><p id="timetable-status" role="status">입력한 시간표를 확인하고 있습니다.</p><div><button type="button" class="primary" id="timetable-save">공유 저장</button><button type="button" class="secondary" id="timetable-reload">저장본 다시 불러오기</button><button type="button" class="secondary" id="timetable-backup">백업 파일 받기</button><button type="button" class="secondary" id="timetable-import">백업 파일 불러오기</button><input id="timetable-file" type="file" accept="application/json,.json" hidden></div></div>
+<section id="week" role="tabpanel" aria-labelledby="week-tab"><h1 class="current-heading">2027년 겨울 방클 고정 블록 시간표</h1><div id="timetable-week"></div></section>
+<section id="day" role="tabpanel" aria-labelledby="day-tab" hidden><h1 class="current-heading">하루 일정 수정</h1><div id="timetable-day"></div></section>
+<section id="builder" role="tabpanel" aria-labelledby="builder-tab" hidden><h1 class="current-heading">아이별 Big 3 · 개인 주간표</h1><div id="personal-timetable"></div></section>
+<section id="programs" role="tabpanel" aria-labelledby="programs-tab" hidden><h1 class="current-heading">프로그램 예시</h1><p class="caption">예시를 가져와 시간과 내용을 입력하거나, 새로운 프로그램명을 직접 작성합니다.</p><label class="current-search">프로그램 찾기<input id="program-search" type="search" placeholder="프로그램명 검색"></label><div id="current-program-examples"></div></section>
+  <section id="intro" role="tabpanel" aria-labelledby="intro-tab" hidden>
+    <div class="intro-hero">
+      <h1 lang="en"><span>Together, we are</span> <span>stronger and smarter.</span></h1>
+      <p class="intro-lead">함께 생각하고,<br>서로 배우는 겨울방학.</p>
+      <p class="intro-description">물건을 분해하며 발견을 나누고, 함께 만들 것을 정합니다.<br class="intro-wide-break"> 영어·수학에서는 서로 설명하고 질문하며 배웁니다.</p>
+      <div class="intro-actions"><button type="button" class="primary" data-tab-target="programs-tab">프로그램 살펴보기 <span aria-hidden="true">→</span></button><button type="button" class="secondary" data-tab-target="builder-tab">아이별 주간표 구성</button></div>
+    </div>
+    <div class="intro-experiences">
+      <article class="intro-experience intro-collaboration">
+        <div class="intro-experience-heading"><h2>분해 프로젝트</h2><p>발견에서<br> 공동의 이야기로</p></div>
+        <div class="intro-experience-body"><p>물건을 살펴보고 분해하며 각자 발견한 것을 나눕니다. 함께 만들 것을 정해 새로운 쓰임과 이야기로 이어갑니다.</p><p class="intro-experience-point">무엇을 만들었는지와 함께,<br>어떻게 함께 만들었는지를 나눕니다.</p>
+          <ol class="intro-flow" aria-label="분해 프로젝트의 흐름"><li>관찰·발견</li><li>생각 나누기</li><li>함께 선택·제작</li><li>과정·이야기 나누기</li></ol>
+        </div>
+      </article>
+      <article class="intro-experience intro-learning">
+        <div class="intro-experience-heading"><h2>매일 몰입</h2><p>내 배움을<br> 서로의 배움으로</p></div>
+        <div class="intro-experience-body"><p>스스로 공부한 내용을 서로 설명하고 질문합니다. 친구의 생각을 듣고 내 풀이와 설명을 다시 다듬습니다.</p><p class="intro-experience-point">내가 아는 것을 설명하고,<br>친구의 생각에서 다시 배웁니다.</p>
+          <ol class="intro-flow" aria-label="매일 몰입의 흐름"><li>스스로 공부</li><li>서로 설명·질문</li><li>생각 다듬어 공유</li></ol>
+        </div>
+      </article>
+    </div>
+    <div class="intro-continuity"><h2>이어가는 배움,<br> 함께 넓히는 경험</h2><p>기존 베이직의 학습을 이어가며 AI·SEL·영어미술 등 다양한 활동을 만납니다. 함께 발견하고, 설명하고, 만들어 가는 경험을 한 주 안에 연결합니다.</p></div>
+  </section>
+
+<section id="month" role="tabpanel" aria-labelledby="month-tab" hidden><h1 class="current-heading">월간 활동</h1><p class="caption">날짜별 시간표는 달력에서 확인합니다. 아래 활동 흐름은 프로그램을 이어가는 예시입니다.</p><h2>SEL 활동 흐름 예시</h2><div class="project-steps" id="current-project-steps"></div><h2>특별 프로그램</h2><p class="caption">날짜가 정해지지 않은 프로그램은 미정으로 표시합니다.</p><div id="current-special-programs" class="month-events"></div></section>
+<section id="operations" role="tabpanel" aria-labelledby="operations-tab" hidden><h1 class="current-heading">전체 프로그램표</h1><p class="caption">현재 시간표에 입력된 프로그램과 요일·시간·내용입니다.</p><div class="current-table-wrap"><table class="current-program-table"><thead><tr><th scope="col">프로그램명</th><th scope="col">요일·시간</th><th scope="col">내용</th><th scope="col">편성 상태</th></tr></thead><tbody id="current-program-rows"></tbody></table></div></section>
+<section id="calendar" role="tabpanel" aria-labelledby="calendar-tab" hidden><div class="section-heading"><h1 class="current-heading">월간 달력</h1><label>달 선택<select id="current-calendar-month"><option value="2026-12">2026년 12월</option><option value="2027-01" selected>2027년 1월</option><option value="2027-02">2027년 2월</option></select></label></div><p class="caption">현재 주간표를 요일에 맞춰 보여줍니다. 실제 운영일·특별 프로그램 날짜는 별도 확인이 필요합니다.</p><div id="current-calendar"></div><div id="current-calendar-detail"></div><h2>날짜 미정인 특별 프로그램</h2><div id="current-calendar-pending" class="program-list"></div></section>
+<footer>시간표의 프로그램을 누르면 시간과 내용을 수정할 수 있습니다.</footer></main></body></html>

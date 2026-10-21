@@ -1,37 +1,18 @@
 <!doctype html>
-<html lang="ko">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex,nofollow">
-  <meta name="description" content="Together, we are stronger and smarter. 함께 생각하고, 서로 배우는 FOX 겨울방학클래스.">
-  <meta name="theme-color" content="#2f6046">
-  <link rel="icon" href="data:,">
-  <link rel="stylesheet" href="./style.css">
-  <script src="./schedule.js" defer></script>
-  <script src="./student-plan.js" defer></script>
-  <script src="./app.js" defer></script>
-  <script src="./planner-ui.js" defer></script>
-  <title>Together, we are stronger and smarter. · FOX 겨울방학클래스</title>
-</head>
-<body>
-<a class="skip-link" href="#main">본문으로 바로 가기</a>
-<main id="main">
-  <header class="site-header"><p class="site-brand"><strong>FOX LC</strong><span>겨울방학클래스</span></p></header>
-  <nav class="tabs" role="tablist" aria-label="방학클래스 보기">
-    <button type="button" role="tab" id="intro-tab" aria-controls="intro" aria-selected="true">이번 방학클래스</button>
-    <button type="button" role="tab" id="builder-tab" aria-controls="builder" aria-selected="false" tabindex="-1">아이별 Big 3</button>
-    <button type="button" role="tab" id="programs-tab" aria-controls="programs" aria-selected="false" tabindex="-1">프로그램</button>
-    <button type="button" role="tab" id="day-tab" aria-controls="day" aria-selected="false" tabindex="-1">하루 일정</button>
-    <button type="button" role="tab" id="week-tab" aria-controls="week" aria-selected="false" tabindex="-1">주간</button>
-    <button type="button" role="tab" id="month-tab" aria-controls="month" aria-selected="false" tabindex="-1">월간</button>
-    <button type="button" role="tab" id="operations-tab" aria-controls="operations" aria-selected="false" tabindex="-1">운영·담당</button>
-    <button type="button" role="tab" id="calendar-tab" aria-controls="calendar" aria-selected="false" tabindex="-1">달력</button>
-  </nav>
-  <div class="entry-actions" hidden><button type="button" class="primary" id="open-builder">아이별 Big 3 구성</button><button type="button" class="secondary" id="open-overview">전체 프로그램·운영 보기</button></div>
-  <div class="chosen" hidden><div><span class="text-small">프로그램 탐색용 하루 예시</span><output id="chosen" aria-live="polite"></output></div><button type="button" class="primary" id="view-day">하루 일정 보기 <span aria-hidden="true">→</span></button></div>
-  <p id="planning-note" class="caption" hidden>이전 시간표를 바탕으로 한 편성 예시입니다. 새 참여 기준과 시간은 조정 중입니다.</p>
-  <section id="intro" role="tabpanel" aria-labelledby="intro-tab">
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#2f6046"><meta name="description" content="2027년 겨울 방클 고정 블록 시간표. 시간과 활동을 직접 입력하고 하루·주간 일정으로 확인합니다."><title>2027년 겨울 방클 고정 블록 시간표 · FOX LC</title><link rel="icon" href="data:,"><link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="./timetable.css"><link rel="stylesheet" href="./current-app.css"><script src="./schedule.js" defer></script><script src="./timetable.js" defer></script><script src="./timetable-ui.js" defer></script><script src="./personal-timetable.js" defer></script><script src="./current-app.js" defer></script><script src="./shared-save.js" defer></script></head><body><a class="skip-link" href="#main">본문으로 바로 가기</a><main id="main"><header class="site-header"><p class="site-brand"><strong>FOX LC</strong><span>겨울방학클래스</span></p></header><nav class="tabs" role="tablist" aria-label="방학클래스 보기"><button type="button" role="tab" id="week-tab" aria-controls="week" aria-selected="true">주간</button>
+<button type="button" role="tab" id="day-tab" aria-controls="day" aria-selected="false" tabindex="-1">하루 일정</button>
+<button type="button" role="tab" id="builder-tab" aria-controls="builder" aria-selected="false" tabindex="-1">아이별 Big 3</button>
+<button type="button" role="tab" id="programs-tab" aria-controls="programs" aria-selected="false" tabindex="-1">프로그램 예시</button>
+<button type="button" role="tab" id="intro-tab" aria-controls="intro" aria-selected="false" tabindex="-1">이번 방학클래스</button>
+<button type="button" role="tab" id="month-tab" aria-controls="month" aria-selected="false" tabindex="-1">월간</button>
+<button type="button" role="tab" id="operations-tab" aria-controls="operations" aria-selected="false" tabindex="-1">전체 프로그램표</button>
+<button type="button" role="tab" id="calendar-tab" aria-controls="calendar" aria-selected="false" tabindex="-1">달력</button></nav>
+<div id="timetable-savebar" class="current-savebar"><p id="timetable-status" role="status">입력한 시간표를 확인하고 있습니다.</p><div><button type="button" class="primary" id="timetable-save">공유 저장</button><button type="button" class="secondary" id="timetable-reload">저장본 다시 불러오기</button><button type="button" class="secondary" id="timetable-backup">백업 파일 받기</button><button type="button" class="secondary" id="timetable-import">백업 파일 불러오기</button><input id="timetable-file" type="file" accept="application/json,.json" hidden></div></div>
+<section id="week" role="tabpanel" aria-labelledby="week-tab"><h1 class="current-heading">2027년 겨울 방클 고정 블록 시간표</h1><div id="timetable-week"></div></section>
+<section id="day" role="tabpanel" aria-labelledby="day-tab" hidden><h1 class="current-heading">하루 일정 수정</h1><div id="timetable-day"></div></section>
+<section id="builder" role="tabpanel" aria-labelledby="builder-tab" hidden><h1 class="current-heading">아이별 Big 3 · 개인 주간표</h1><div id="personal-timetable"></div></section>
+<section id="programs" role="tabpanel" aria-labelledby="programs-tab" hidden><h1 class="current-heading">프로그램 예시</h1><p class="caption">예시를 가져와 시간과 내용을 입력하거나, 새로운 프로그램명을 직접 작성합니다.</p><label class="current-search">프로그램 찾기<input id="program-search" type="search" placeholder="프로그램명 검색"></label><div id="current-program-examples"></div></section>
+  <section id="intro" role="tabpanel" aria-labelledby="intro-tab" hidden>
     <div class="intro-hero">
       <h1 lang="en"><span>Together, we are</span> <span>stronger and smarter.</span></h1>
       <p class="intro-lead">함께 생각하고,<br>서로 배우는 겨울방학.</p>
@@ -54,106 +35,8 @@
     </div>
     <div class="intro-continuity"><h2>이어가는 배움,<br> 함께 넓히는 경험</h2><p>기존 베이직의 학습을 이어가며 AI·SEL·영어미술 등 다양한 활동을 만납니다. 함께 발견하고, 설명하고, 만들어 가는 경험을 한 주 안에 연결합니다.</p></div>
   </section>
-  <section id="builder" role="tabpanel" aria-labelledby="builder-tab" hidden>
-    <h2>아이별 Big 3 구성</h2><p class="caption">아이의 희망 조건을 입력한 뒤, 가능한 시간에 참여할 클래스를 골라 주세요. 신청 전 편성안이며 새로고침하면 입력이 지워집니다.</p>
-    <form id="student-form" novalidate>
-      <fieldset><legend>아이 기본정보</legend><div class="planner-fields">
-        <label>아이 이름·별칭<input id="student-name" type="text" maxlength="40" autocomplete="off" placeholder="이름 또는 별칭"></label>
-        <label>학년<select id="student-grade"><option value="">미입력</option><option>유아</option><option>초등 1학년</option><option>초등 2학년</option><option>초등 3학년</option><option>초등 4학년</option><option>초등 5학년</option><option>초등 6학년</option></select></label>
-        <label>참여 기간<select id="student-period"><option value="">협의 중</option><option>2027년 1월</option><option>2027년 2월</option><option>2027년 1·2월</option></select></label>
-      </div><label class="check-option"><input id="student-member" type="checkbox">기존 영어·수학 회원 · 예약 개별지도 확인</label></fieldset>
-      <fieldset><legend>요일별 참여·등하원 시간</legend><div id="student-days" class="day-attendance"></div><p class="caption" id="time-guide">참여하는 요일마다 등하원 시간을 입력합니다. 빈 시간은 미확정으로 남습니다. 실제 운영일·등하원 가능 시간과 구독 요금 기준은 별도로 확인합니다.</p></fieldset>
-      <fieldset><legend>기존 베이직·개별지도</legend><p class="caption">이어가는 프로그램과 요일·시간·담당을 넣어 주세요. 다른 베이직 프로그램명도 직접 입력할 수 있습니다. 시간·담당을 모르면 비워 두세요. 입력은 이 아이의 편성안입니다.</p><div id="student-basics"></div><div id="student-basic-warnings" class="student-messages" role="status" hidden></div><button type="button" class="secondary" id="add-basic">베이직 활동 추가</button><datalist id="basic-program-names"></datalist><datalist id="basic-owner-names"></datalist></fieldset>
-      <fieldset><legend>Big 3에 넣을 활동</legend>
-        <label class="check-option"><input id="student-dis" type="checkbox">분해클래스 포함 · 금요일 오전·오후 중 1회, 참여 시간 협의 중</label>
-        <label class="planner-focus">매일 집중 방식<select id="student-focus" aria-describedby="focus-guide"><option value="">선택해 주세요</option></select></label>
-        <p class="caption" id="focus-guide">영어·수학에 함께 참여하는 방향입니다. 아래 시간·선택은 이전 편성 예시이며, 반일 참여와 실제 편성은 조정 중입니다.</p>
-        <p class="field-label">원하는 클래스 · 여러 개 선택 가능</p><div id="student-preferences" class="planner-preferences"></div>
-        <p class="caption">학년별 대상·참여 조건은 협의 중입니다. 같은 시간에 원하는 활동이 겹치면 아래 주간표에서 하나를 고릅니다.</p>
-      </fieldset>
-      <button type="submit" class="primary">주간표 구성하기</button>
-    </form>
-    <div id="student-result" hidden>
-      <div class="section-heading"><h2 id="student-plan-title" tabindex="-1">개인 주간 편성안</h2><button type="button" class="secondary" id="print-student">개인 주간표 인쇄</button></div>
-      <p id="student-profile" class="student-profile"></p><div id="student-big3" class="student-big3"></div><div id="student-basic-summary" class="student-basic-summary"></div>
-      <p class="caption">오전·오후에서 참여할 시간을 직접 선택합니다. 빈 시간은 미선택으로 남습니다. 분해클래스는 한 주 1회입니다.</p>
-      <p id="student-live-status" class="sr-only" role="status"></p>
-      <div id="student-messages" class="student-messages"></div>
-      <table class="student-weekly" role="table"><caption class="sr-only">아이별 베이직·Big 3 주간 편성안과 시간별 활동 선택</caption><thead role="rowgroup"><tr role="row"><th scope="col">요일·희망시간</th><th scope="col">기존 베이직</th><th scope="col">오전 클래스<br>10:00–12:00안</th><th scope="col">매일 집중타임</th><th scope="col">오후 클래스<br>15:30–17:30안</th><th scope="col">공동시간·확인 사항</th></tr></thead><tbody id="student-week-rows" role="rowgroup"></tbody></table>
-      <p class="caption" id="student-member-note" hidden>기존 교재·진도를 이어가는 베이직과 집중타임 공동 활동을 함께 확인합니다. 예약 개별지도는 위 베이직 항목에 따로 입력하고 시간 겹침을 조정합니다. 입력하지 않은 시간·담당은 미확정입니다.</p>
-      <p class="caption">반복 주간 편성안입니다. 날짜별 특별 일정은 달력에서 확인합니다. 메인 역할 확인과 실제 시간별 근무 확정은 별도입니다. 당번·공간·인원·연구원 휴식은 현재 미확정 상태를 유지합니다.</p>
-    </div>
-  </section>
-  <section id="programs" role="tabpanel" aria-labelledby="programs-tab" hidden>
-    <div class="recommendation"><h2>Big 3를 한 아이의 한 주로</h2><p>분해클래스 + 매일 집중타임 + 좋아하는 클래스</p><p class="caption">초등 저학년 참여 예시: SEL을 선호하는 학생의 한 주와 감정 표현을 책으로 모으는 한 달을 살펴보세요.</p><button type="button" class="text-button" id="view-big3-week">Big 3 주간 참여 예시 보기 →</button></div>
-    <button type="button" class="text-button operations-link" id="view-operations">센터 하루 운영·담당·휴식 보기 →</button>
-    <button type="button" class="text-button" id="view-program-roster">전체 프로그램·담당표 보기 →</button>
-    <fieldset><legend>1. 살펴볼 클래스</legend><p class="caption">선택한 클래스가 있는 하루를 미리 봅니다. 유아·초등 저학년·고학년별 대상과 참여 조건은 협의 중입니다.</p><div class="choices" id="class-choices"></div></fieldset>
-    <fieldset><legend>2. 집중타임</legend><p class="caption">영어·수학을 공부하고, 서로 설명하고 질문하며 배움을 이어갑니다. 아래 선택은 활동을 살펴보는 이전 편성 예시입니다.</p><div class="choices focus-choices" id="focus-choices"></div></fieldset>
-    <h2>함께하는 활동</h2><div class="program-list" id="shared-programs"></div>
-    <h2>특별 프로그램</h2><p class="caption">프로그램을 누르면 월간 일정에서 볼 수 있습니다. 운영 여부·날짜·참여 방법은 추후 안내합니다.</p><div class="program-list events" id="event-programs"></div>
-    <h2>추후 안내 활동</h2><div class="program-list" id="future-programs"></div>
-    <h2>방학 동안 함께 이어갑니다</h2>
-    <div class="info-list">
-      <div><h3>해피클래스 · 해피아워</h3><p>방학클래스 신청자 혜택. 이용 기간과 시간은 별도로 안내합니다.</p></div>
-      <div><h3>기존 영어·수학 학습</h3><p>딥러닝학원 연계 학습과 Reading Gate·Spectrum Writing 등 기존 교재의 진도를 이어갑니다.</p></div>
-      <div><h3>월별 평가 · 성장 리포트</h3><p>활동 기록과 영어·수학 학습 내용을 함께 확인합니다.</p></div>
-    </div>
-  </section>
-  <section id="day" role="tabpanel" aria-labelledby="day-tab" hidden>
-    <div class="section-heading"><h2>프로그램별 하루 예시</h2><label class="day-picker">요일 <select id="day-choice"></select></label></div>
-    <p class="caption">프로그램 탭에서 선택한 클래스의 하루 예시입니다. 아이별 Big 3로 만든 주간표는 아이별 Big 3 탭에서 확인해 주세요. 실제 날짜의 특별 프로그램은 달력에서 확인합니다. 신청·예약으로 저장되지 않습니다.</p><label class="session-picker">클래스 참여 시간 <select id="class-session"></select></label>
-    <table class="daily"><caption class="sr-only">선택한 프로그램의 하루 일정</caption><thead><tr><th scope="col">시간</th><th scope="col">프로그램</th></tr></thead><tbody id="daily-rows"></tbody></table>
-    <p class="caption" id="day-note"></p><a class="plain-link" href="./daily.html">센터 기본 일간표만 보기 →</a>
-    <h2>기존 회원의 예약 개별지도</h2><p class="caption">집중타임 공동 활동과 기존 베이직의 교재·개별지도 시간을 함께 확인합니다. 집중시간 외 예약지도는 아이별 Big 3에서 베이직으로 입력하고, 다른 활동과 겹치지 않게 편성합니다.</p><div class="table-scroll"><table class="reservation-table"><thead><tr><th scope="col">활동</th><th scope="col">시간·담당</th><th scope="col">이어갈 내용</th></tr></thead><tbody id="reservation-rows"></tbody></table></div>
-  </section>
-  <section id="week" role="tabpanel" aria-labelledby="week-tab" hidden>
-    <h2>연구원용 예시 프로그램 시간표</h2><p class="caption">프로그램 선택, 고정 집중타임, 기존 베이직과 특별 프로그램을 함께 보는 센터 주간 편성 예시입니다. 요일별 배치와 시각은 조정 가능한 예시이며, 실제 개설 그룹 수·인원·공간·근무 배정은 미정입니다. 아이별 주간표와 구분하며, 날짜별 특별 일정은 달력에서 확인해 주세요.</p>
-    <div class="block-key"><span class="fixed-time">고정 공동시간</span><span class="class-time">요일 클래스</span><span class="open-time">상시 개별활동</span><span class="special-time">특별 프로그램</span></div>
-    <p class="mobile-hint">표를 좌우로 밀어 요일을 확인하세요.</p>
-    <div class="table-scroll"><table class="weekly"><caption class="sr-only">월요일부터 금요일까지 프로그램</caption><thead><tr><th scope="col">시간</th><th scope="col">월</th><th scope="col">화</th><th scope="col">수</th><th scope="col">목</th><th scope="col">금</th></tr></thead><tbody id="weekly-rows"></tbody></table></div>
-    <p class="caption">영어 말하기는 영어 활동과 이어집니다. 틈새 체육활동은 참여 시간 협의 중입니다. 금요일 분해클래스는 오전·오후 중 1회 참여하는 편성안입니다. 영어·수학에 함께 참여하는 방향입니다. 아래 시간·선택은 이전 편성 예시이며, 반일 참여와 실제 편성은 조정 중입니다.</p>
-    <h2 id="big3-heading" tabindex="-1">Big 3 · 한 학생의 주간 참여 예시</h2><p class="caption">SEL을 선호하고 주 5일 참여하는 초등 저학년 학생을 가정했습니다. 이전 시간표를 바탕으로 한 참여 예시입니다. 여기서는 영어+수학을 함께 살펴보며, 새 시간과 반일 참여 기준은 조정 중입니다.</p><div class="table-scroll"><table class="big3-table"><thead><tr><th scope="col">요일</th><th scope="col">선택한 클래스</th><th scope="col">매일 집중시간</th><th scope="col">미선택·협의 사항</th></tr></thead><tbody id="big3-rows"></tbody></table></div><p class="caption">금요일 분해는 오전·오후 중 1회, 참여 시간 협의 중입니다. 나머지 반일은 자동 배정하지 않습니다.</p><button type="button" class="text-button" id="view-sel-month">이 학생의 SEL 월간 진행 예시 보기 →</button>
-  </section>
-  <section id="month" role="tabpanel" aria-labelledby="month-tab" hidden>
-    <h2>방학의 일정</h2>
-    <div class="periods"><div><h3>12월</h3><p>해피클래스 · 해피아워</p><span class="text-small">신청자 혜택 · 이용 시간 별도 안내</span></div><div><h3>1월</h3><p>방학클래스 · 월 구독</p><span class="text-small">요일별 클래스 · 집중타임</span></div><div><h3>2월</h3><p>방학클래스 · 월 구독</p><span class="text-small">요일별 클래스 · 집중타임</span></div></div>
-    <h2>한 달 동안 이어가는 활동</h2><div class="info-list"><div><h3>AI · 매회 체험 / 프로젝트</h3><p>체험은 참여할 때 새 주제를 탐구합니다. 프로젝트는 지난 결과를 이어갑니다. 아이가 AI의 제안을 비교하고 표현을 고칩니다. 세부 주제·진행안 협의 중.</p></div><div><h3>SEL · 이어가는 프로젝트</h3><p>감정카드와 내 경험에서 표현을 모아 책으로 엮습니다. 다음 참여 때 모은 말·글·그림을 이어 정리하는 진행 예시입니다.</p></div><div><h3>영어·수학 · 기존 진도 이어가기</h3><p>이전 교재 지점부터 이어갑니다. 다음 참여 때 이어갈 내용과 월별 평가·성장 리포트는 담당자가 확인합니다.</p></div></div>
-    <h2 id="sel-month-heading" tabindex="-1">SEL 책 만들기 · 월간 진행 예시</h2><p class="caption">주간 Big 3 예시에서 SEL을 선택한 학생의 흐름입니다. 참여 기간과 진행 상황에 따라 앞선 활동을 반복하거나 이어갑니다. 주차별 공통 진도로 확정된 내용은 없습니다.</p><div class="project-steps" data-project-steps></div><p class="project-result"><strong>남길 결과 예시</strong> 내 감정 표현을 모은 작은 책</p>
-    <h2>특별 프로그램 일정</h2><p class="caption">운영 여부와 날짜가 정해지면 안내합니다.</p>
-    <div id="monthly-events" class="month-events"></div>
-  </section>
-  <section id="operations" role="tabpanel" aria-labelledby="operations-tab" hidden>
-    <div class="section-heading"><h2 id="operations-heading" tabindex="-1">센터 하루 운영·편성 상태</h2><label class="day-picker">요일 <select id="operations-day"><option value="0">월요일</option><option value="1">화요일</option><option value="2">수요일</option><option value="3">목요일</option><option value="4">금요일</option></select></label></div>
-    <dl id="operations-status" class="operations-status"></dl>
-    <p id="care-role" class="care-role"></p>
-    <p class="caption operations-caption">시간·개설은 편성안입니다. 메인 역할 확인과 시간별 근무 확정은 별도입니다.</p>
-    <div class="operations-timeline"><table class="operations-table" role="table"><caption class="sr-only">시간별 활동·메인 역할·실행 당번·작업과 휴식의 편성 상태</caption><thead role="rowgroup"><tr role="row"><th scope="col" role="columnheader">시간</th><th scope="col" role="columnheader">활동</th><th scope="col" role="columnheader">메인 담당</th><th scope="col" role="columnheader">시간별 당번</th><th scope="col" role="columnheader">연구원 개인작업·휴식</th></tr></thead><tbody id="operations-rows" role="rowgroup"></tbody></table></div>
-    <details class="operation-notes"><summary>운영 조건·프로그램 구분 보기</summary>
-      <p class="caption">수학 메인 김철병은 역할 확인, 나머지 역할은 배정안 또는 미배정입니다. 운영 총괄은 양준모 센터장 배정안입니다. 생활지원 역할안은 담당 분야의 후보이며, 실제 시간별 당번은 별도로 편성합니다.</p>
-      <div class="capacity-status"><span>학생 수 <strong>미정</strong></span><span>활동별 그룹 수 <strong>미정</strong></span><span>공간 <strong>미정</strong></span><span>근무 가능시간 <strong>미확인</strong></span></div>
-      <p class="caption">담당·보조·생활지원이 채워진 뒤 연구원 개인작업과 휴식을 편성합니다. 메인 연구원의 간식시간 교대휴식도 미편성입니다. 실제 휴식 가능 여부는 확인 전입니다.</p>
-      <div class="operation-types"><div class="fixed-time"><strong>고정 공동시간</strong><span>매일 집중타임 · 점심·간식·몸풀기</span></div><div class="class-time"><strong>요일 클래스</strong><span>AI·SEL·분해·영어미술·플레이팩트·요리</span></div><div class="open-time"><strong>상시 개별활동</strong><span>기존 교재·진도 · 독서·이어 하던 작업</span></div><div class="special-time"><strong>특별 프로그램</strong><span>초청 특강 · 논산 체험 · FOX Fair</span></div></div>
-      <p class="caption">기존 베이직과 집중타임 공동 활동을 함께 이어갑니다. 베이직·개별지도는 아이별 주간표에 따로 입력하여 시간 겹침을 확인합니다. 미입력 시간·담당은 미확정입니다. 특별 프로그램은 날짜·대체 시간·담당을 정한 뒤 반영합니다.</p>
-    </details>
-    <h2>집중타임 보조 당번 · 편성 전</h2><p class="caption">영어·수학 메인은 두 집중 블록을 이어 맡고, 보조 연구원이 순환하는 운영안입니다. AI 심화·독서·개별 작업은 별도 담당을 배정합니다. 보조 당번·필요 인원·교대휴식은 학생 그룹과 근무시간 확인 후 정합니다.</p>
-    <div class="table-scroll"><table class="duty-table"><thead><tr><th scope="col">요일</th><th scope="col">13:00–14:00</th><th scope="col">14:00–14:30<br>간식 생활 당번</th><th scope="col">14:30–15:30</th><th scope="col">연구원 개인작업·교대휴식</th></tr></thead><tbody id="duty-rows"></tbody></table></div>
-    <p class="caption">가장 바쁜 하루의 학생 그룹·공간·메인·보조·생활지원을 함께 확인한 뒤 당번을 정합니다. 연구원 개인작업과 교대휴식은 각각 편성합니다.</p>
-    <h2>연구원 소속 명단</h2><div class="staff-teams" id="staff-teams"></div>
-    <h2 id="roster-heading" tabindex="-1">전체 프로그램·시간·담당</h2><p class="caption">표의 시간은 편성안입니다. 메인 담당의 역할 상태와 프로그램 개설 확정은 구분해 확인합니다. 베이직은 아이별 시간·담당을 확인하며, 빈 시간에 자동 배정하지 않습니다.</p><div class="roster-filters"><label>프로그램 구분<select id="roster-filter"><option value="">전체 프로그램</option><option>요일 클래스</option><option>고정 집중</option><option>공동·연계</option><option>기존 베이직</option><option>상시 개별</option><option>특별 프로그램</option><option>추후 안내</option><option>신청자 혜택</option><option>기록·평가</option></select></label><label>프로그램 찾기<input type="search" id="roster-search" placeholder="프로그램명·담당 이름"></label></div><p id="roster-count" class="caption" role="status"></p><div class="table-scroll roster-scroll"><table class="program-roster" role="table"><thead><tr><th scope="col">구분</th><th scope="col">프로그램</th><th scope="col">운영 시간</th><th scope="col">메인 담당</th><th scope="col">보조·협업</th><th scope="col">편성 상태</th></tr></thead><tbody id="program-roster"></tbody></table></div>
-    <div id="student-basic-roster-section"><h3>이 아이의 베이직 입력안</h3><p class="caption" id="student-basic-roster-profile">아이별 Big 3에서 베이직을 추가하면 여기에 표시됩니다. 센터 전체의 개설·근무 확정과는 별도로 확인합니다.</p><div class="table-scroll"><table class="basic-roster"><thead><tr><th scope="col">프로그램</th><th scope="col">요일·시간</th><th scope="col">담당</th><th scope="col">편성 상태</th></tr></thead><tbody id="student-basic-roster"><tr><td colspan="4">입력된 베이직 없음</td></tr></tbody></table></div></div>
-  </section>
-  <section id="calendar" role="tabpanel" aria-labelledby="calendar-tab" hidden>
-    <div class="section-heading"><h2>월간 달력</h2><div class="calendar-controls"><button type="button" id="calendar-prev" aria-label="이전 달">‹</button><label><span class="sr-only">달 선택</span><select id="calendar-month"><option value="0">2026년 12월</option><option value="1" selected>2027년 1월</option><option value="2">2027년 2월</option></select></label><button type="button" id="calendar-next" aria-label="다음 달">›</button></div></div>
-    <p class="caption">센터 기본 편성안입니다. 날짜를 누르면 해당 요일의 활동과 담당 배정 상태를 봅니다. 특별 일정은 대체할 시간과 함께 반영합니다.</p>
-    <div id="calendar-themes" class="calendar-themes"></div>
-    <p class="calendar-focus" id="calendar-focus"></p>
-    <table class="calendar-table"><caption id="calendar-title" class="sr-only">2027년 1월 달력</caption><thead><tr><th scope="col">일</th><th scope="col">월</th><th scope="col">화</th><th scope="col">수</th><th scope="col">목</th><th scope="col">금</th><th scope="col">토</th></tr></thead><tbody id="calendar-days"></tbody></table>
-    <article id="calendar-detail" class="calendar-detail" aria-live="polite"></article>
-    <h2>날짜 미정인 특별 프로그램</h2><p class="caption">운영 여부와 날짜가 정해지면 달력에 표시합니다.</p><div id="calendar-pending" class="calendar-pending"></div>
-    <p class="caption calendar-holidays">공휴일의 센터 운영은 별도로 안내합니다.</p>
-  </section>
-  <footer>대상별 참여 프로그램·비용·운영일은 신청 안내에서 확인해 주세요.</footer>
-</main>
-</body>
-</html>
+
+<section id="month" role="tabpanel" aria-labelledby="month-tab" hidden><h1 class="current-heading">월간 활동</h1><p class="caption">날짜별 시간표는 달력에서 확인합니다. 아래 활동 흐름은 프로그램을 이어가는 예시입니다.</p><h2>SEL 활동 흐름 예시</h2><div class="project-steps" id="current-project-steps"></div><h2>특별 프로그램</h2><p class="caption">날짜가 정해지지 않은 프로그램은 미정으로 표시합니다.</p><div id="current-special-programs" class="month-events"></div></section>
+<section id="operations" role="tabpanel" aria-labelledby="operations-tab" hidden><h1 class="current-heading">전체 프로그램표</h1><p class="caption">현재 시간표에 입력된 프로그램과 요일·시간·내용입니다.</p><div class="current-table-wrap"><table class="current-program-table"><thead><tr><th scope="col">프로그램명</th><th scope="col">요일·시간</th><th scope="col">내용</th><th scope="col">편성 상태</th></tr></thead><tbody id="current-program-rows"></tbody></table></div></section>
+<section id="calendar" role="tabpanel" aria-labelledby="calendar-tab" hidden><div class="section-heading"><h1 class="current-heading">월간 달력</h1><label>달 선택<select id="current-calendar-month"><option value="2026-12">2026년 12월</option><option value="2027-01" selected>2027년 1월</option><option value="2027-02">2027년 2월</option></select></label></div><p class="caption">현재 주간표를 요일에 맞춰 보여줍니다. 실제 운영일·특별 프로그램 날짜는 별도 확인이 필요합니다.</p><div id="current-calendar"></div><div id="current-calendar-detail"></div><h2>날짜 미정인 특별 프로그램</h2><div id="current-calendar-pending" class="program-list"></div></section>
+<footer>시간표의 프로그램을 누르면 시간과 내용을 수정할 수 있습니다.</footer></main></body></html>
