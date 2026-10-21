@@ -1,6 +1,10 @@
 'use strict';
 {
   const weekdays=['월요일','화요일','수요일','목요일','금요일'];
+  const basicLabs=['AI연구소','SEL연구소','언어연구소'];
+  const basicNote='정해진 베이직 활동 시간에 운영하며, 연구소별 세부 편성은 미확정입니다.';
+  const isBasic=block=>block.name==='베이직 활동'||basicLabs.includes(block.name);
+  const description=block=>[...(block.name==='베이직 활동'?[basicLabs.join(' · ')]:[]),block.detail].filter(Boolean).join(' · ');
   const minutes=value=>typeof value==='string'&&/^([01]\d|2[0-3]):[0-5]\d$/.test(value)?Number(value.slice(0,2))*60+Number(value.slice(3)):null;
   const formatTime=value=>String(Math.floor(value/60)).padStart(2,'0')+':'+String(value%60).padStart(2,'0');
   const copy=value=>JSON.parse(JSON.stringify(value));
@@ -73,7 +77,7 @@
     const points=[...new Set(state.blocks.flatMap(b=>[minutes(b.start),minutes(b.end)]))].sort((a,b)=>a-b);
     return points.slice(0,-1).map((start,index)=>({start:formatTime(start),end:formatTime(points[index+1]),cells:weekdays.map((_,day)=>dayBlocks(state,day).filter(b=>minutes(b.start)<points[index+1]&&minutes(b.end)>start))}));
   }
-  const api={weekdays,minutes,formatTime,createDefault,validate,checked,dayBlocks,upsert,remove,conflicts,bounds,rows};
+  const api={weekdays,basicLabs,basicNote,isBasic,description,minutes,formatTime,createDefault,validate,checked,dayBlocks,upsert,remove,conflicts,bounds,rows};
   globalThis.WinterTimetable=api;
   if(typeof module!=='undefined')module.exports=api;
 }

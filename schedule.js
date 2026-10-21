@@ -43,10 +43,7 @@
     {name:'태권도',detail:'운영 여부 추후 안내'},
     {name:'Life OS 연계 활동',detail:'활동 내용·운영 여부 추후 안내'}
   ];
-  const basics = [
-    {name:'베이직 영어·교재',detail:'Reading Gate·Spectrum Writing 등 이어가는 교재·진도'},
-    {name:'베이직 수학·교재',detail:'기존 수학 교재·진도와 개별지도'}
-  ];
+  const basics = ['AI연구소','SEL연구소','언어연구소'].map(name=>({name,detail:'베이직 · 정해진 베이직 활동 시간에 운영하며, 연구소별 세부 편성은 미확정입니다.'}));
   const week = [
     {am:['ai','art'],pm:['ai','play']},
     {am:['sel','art'],pm:['ai','art']},
@@ -71,13 +68,7 @@
     stretch:{name:'전우열'},sport:{name:'김지은'},life:{name:'오하림'},care:{name:'박지영'},lead:{name:'양준모'}
   };
   const staffing = {assistant:'미배정',careDuty:'미배정',work:'미편성',rest:'미편성'};
-  const themes = [
-    {id:'ai',name:'AI 집중요일',short:'AI',detail:'생성형 AI · 표현·제작'},
-    {id:'sel',name:'SEL 집중요일',short:'SEL',detail:'감정카드 · 감정 표현'},
-    {id:'play',name:'플레이팩트·요리',short:'놀이·요리',detail:'교구 탐구 · 요리·베이킹'},
-    {id:'art',name:'SEL·영어미술',short:'SEL·미술',detail:'감정 표현 · 협동 미술'},
-    {id:'dis',name:'분해클래스',short:'분해',detail:'공구 · 분해·관찰·재구성'}
-  ];
+  const themes = [];
   const blocks = [
     {key:'arrival',time:'등원–10:00',label:'등원 · 간식 · 개인 활동',kind:'fixed-time'},
     {key:'am',time:'10:00–12:00',kind:'class-time'},

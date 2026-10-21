@@ -20,7 +20,7 @@
   });
   document.addEventListener('click',event=>{const button=event.target.closest('[data-tab-target]');if(button)show(button.dataset.tabTarget.replace(/-tab$/,''),true);});
   window.addEventListener('hashchange',()=>show(location.hash.slice(1)));
-  const groups=[['클래스',S.classes],['집중 활동',S.focus],['함께하는 활동',S.shared],['특별 프로그램',S.events],['추가 예시',S.future],['베이직',S.basics]];
+  const groups=[['클래스',S.classes],['집중 활동',S.focus],['함께하는 활동',S.shared],['특별 프로그램',S.events],['추가 예시',S.future],['베이직 · 연구소별 활동',S.basics]];
   const examples=groups.flatMap(([group,items])=>items.map(item=>({...item,group})));
   function renderExamples(){
     const query=$('program-search').value.trim().toLocaleLowerCase();
@@ -36,14 +36,14 @@
     for(const block of [...state.blocks].sort((a,b)=>a.day-b.day||T.minutes(a.start)-T.minutes(b.start))){
       if(!groups.has(block.name))groups.set(block.name,[]);groups.get(block.name).push(block);
     }
-    $('current-program-rows').innerHTML=[...groups].map(([name,blocks])=>'<tr><th scope="row">'+e(name)+'</th><td>'+blocks.map(b=>'<span class="roster-session">'+e(T.weekdays[b.day]+' '+b.start+'–'+b.end)+'</span>').join('')+'</td><td>'+e([...new Set(blocks.map(b=>b.detail).filter(Boolean))].join(' / ')||'내용 미입력')+'</td><td>'+ (blocks.some(b=>conflicts.has(b.id))?'시간 겹침 · 조정 필요':'시간표 입력됨')+'</td></tr>').join('')||'<tr><td colspan="4">입력된 일정이 없습니다.</td></tr>';
+    $('current-program-rows').innerHTML=[...groups].map(([name,blocks])=>'<tr><th scope="row">'+e(name)+'</th><td>'+blocks.map(b=>'<span class="roster-session">'+e(T.weekdays[b.day]+' '+b.start+'–'+b.end)+'</span>').join('')+'</td><td>'+e([...new Set(blocks.map(b=>T.description(b)).filter(Boolean))].join(' / ')||'내용 미입력')+'</td><td>'+ (blocks.some(b=>conflicts.has(b.id))?'시간 겹침 · 조정 필요':'시간표 입력됨')+'</td></tr>').join('')||'<tr><td colspan="4">입력된 일정이 없습니다.</td></tr>';
   }
   let selectedDate='2027-01-04';
   function renderCalendarDetail(){
     const date=new Date(selectedDate+'T12:00:00'),day=date.getDay()-1,holiday=S.holidays[selectedDate];
     const active=selectedDate>='2027-01-04'&&day>=0&&day<5&&!holiday;
     const blocks=active?T.dayBlocks(U.getState(),day):[];
-    $('current-calendar-detail').innerHTML='<h2>'+e(selectedDate+' · '+['일','월','화','수','목','금','토'][date.getDay()]+'요일')+'</h2>'+(holiday?'<p>'+e(holiday)+' · 센터 운영 별도 확인</p>':blocks.length?'<table class="current-day-table"><thead><tr><th scope="col">시간</th><th scope="col">프로그램</th><th scope="col">내용</th></tr></thead><tbody>'+blocks.map(b=>'<tr><th scope="row">'+e(b.start+'–'+b.end)+'</th><td>'+e(b.name)+'</td><td>'+e(b.detail)+'</td></tr>').join('')+'</tbody></table><button class="secondary" type="button" data-current-day="'+day+'">'+T.weekdays[day]+' 시간표 수정</button>':'<p>정규 시간표 적용일을 별도로 확인해 주세요.</p>');
+    $('current-calendar-detail').innerHTML='<h2>'+e(selectedDate+' · '+['일','월','화','수','목','금','토'][date.getDay()]+'요일')+'</h2>'+(holiday?'<p>'+e(holiday)+' · 센터 운영 별도 확인</p>':blocks.length?'<table class="current-day-table"><thead><tr><th scope="col">시간</th><th scope="col">프로그램</th><th scope="col">내용</th></tr></thead><tbody>'+blocks.map(b=>'<tr><th scope="row">'+e(b.start+'–'+b.end)+'</th><td>'+e(b.name)+'</td><td>'+e(T.description(b))+'</td></tr>').join('')+'</tbody></table><button class="secondary" type="button" data-current-day="'+day+'">'+T.weekdays[day]+' 시간표 수정</button>':'<p>정규 시간표 적용일을 별도로 확인해 주세요.</p>');
   }
   function renderCalendar(){
     const month=$('current-calendar-month').value,[year,m]=month.split('-').map(Number),length=new Date(year,m,0).getDate(),offset=new Date(year,m-1,1).getDay(),state=U.getState();

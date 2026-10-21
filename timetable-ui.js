@@ -9,7 +9,7 @@
     const all=[...old,...T.createDefault().blocks];
     return [...new Map(all.map(item=>[item.name,{name:item.name,detail:item.detail||''}])).values()];
   }
-  function color(block){return block.name==='베이직 활동'?'basic':block.name.startsWith('분해 프로젝트')||block.name==='합창'?'project':'fixed';}
+  function color(block){return T.isBasic(block)?'basic':block.name.startsWith('분해 프로젝트')||block.name==='합창'?'project':'fixed';}
   function message(list){return list.length?'<div class="tt-warnings" role="status"><strong>시간 겹침 · 조정 필요</strong><ul>'+list.map(c=>'<li>'+e(T.weekdays[c.day]+' '+c.start+'–'+c.end)+' · '+c.names.map((name,index)=>'<button type="button" class="tt-conflict-link" data-tt-edit="'+e([c.a,c.b][index])+'">'+e(name)+'</button>').join(' / ')+'</li>').join('')+'</ul></div>':'';}
   function grid(blocks,days,range){
     const height=range.end-range.start;
@@ -20,7 +20,7 @@
     const overlapIds=new Set(T.conflicts(state).flatMap(c=>[c.a,c.b]));
     const items=blocks.map(block=>{
       const duration=T.minutes(block.end)-T.minutes(block.start),column=days.indexOf(block.day)+2;
-      return '<button type="button" class="tt-block tt-'+color(block)+(overlapIds.has(block.id)?' tt-overlap':'')+'" data-tt-edit="'+e(block.id)+'" style="grid-column:'+column+';grid-row:'+(T.minutes(block.start)-range.start+2)+' / span '+duration+'" aria-label="'+e(T.weekdays[block.day]+' '+block.start+'–'+block.end+' '+block.name+' · '+duration+'분 · 수정')+'" title="'+e(block.name+'\n'+block.start+'–'+block.end+' · '+duration+'분'+(block.detail?'\n'+block.detail:''))+'"><strong>'+e(block.name)+'</strong>'+(days.length===1?'<span class="tt-block-time">'+e(block.start+'–'+block.end+' · '+duration+'분')+'</span>':'')+(block.detail?'<span class="tt-block-detail">'+e(block.detail)+'</span>':'')+'</button>';
+      return '<button type="button" class="tt-block tt-'+color(block)+(overlapIds.has(block.id)?' tt-overlap':'')+'" data-tt-edit="'+e(block.id)+'" style="grid-column:'+column+';grid-row:'+(T.minutes(block.start)-range.start+2)+' / span '+duration+'" aria-label="'+e(T.weekdays[block.day]+' '+block.start+'–'+block.end+' '+block.name+' · '+duration+'분 · 수정')+'" title="'+e(block.name+'\n'+block.start+'–'+block.end+' · '+duration+'분'+(T.description(block)?'\n'+T.description(block):''))+'"><strong>'+e(block.name)+'</strong>'+(days.length===1?'<span class="tt-block-time">'+e(block.start+'–'+block.end+' · '+duration+'분')+'</span>':'')+(T.description(block)?'<span class="tt-block-detail">'+e(T.description(block))+'</span>':'')+'</button>';
     }).join('');
     return '<div class="tt-grid '+(days.length===1?'tt-single-grid':'tt-week-grid')+'" style="--tt-days:'+days.length+';grid-template-rows:42px repeat('+height+',2px)" aria-label="'+(days.length===1?'하루':'주간')+' 시간표">'+headers+backgrounds+ticks+items+'</div>';
   }
@@ -30,13 +30,13 @@
       const key=index+':'+day;if(skip.has(key))return '';
       const signature=blocks.map(b=>b.id).join('|');let span=1;
       while(index+span<rows.length&&rows[index+span].cells[day].map(b=>b.id).join('|')===signature){skip.add((index+span)+':'+day);span++;}
-      return '<td rowspan="'+span+'">'+blocks.map(block=>'<button type="button" data-tt-edit="'+e(block.id)+'"><strong>'+e(block.name)+'</strong>'+(block.detail?'<small>'+e(block.detail)+'</small>':'')+'</button>').join('')+'</td>';
+      return '<td rowspan="'+span+'">'+blocks.map(block=>'<button type="button" data-tt-edit="'+e(block.id)+'"><strong>'+e(block.name)+'</strong>'+(T.description(block)?'<small>'+e(T.description(block))+'</small>':'')+'</button>').join('')+'</td>';
     }).join('')+'</tr>').join('')+'</tbody></table>';
   }
   function renderWeek(){
     if(!$('timetable-week'))return;
     const table=exactTable();
-    $('timetable-week').innerHTML='<p class="tt-guide">프로그램을 누르면 시간과 내용을 고칠 수 있습니다.</p>'+message(T.conflicts(state))+'<div class="tt-week-scroll">'+grid(state.blocks,[0,1,2,3,4],T.bounds(state))+'</div><details class="tt-table-details"><summary>주간표를 표로 보기</summary><div class="tt-week-scroll">'+table+'</div></details><div class="tt-print-table">'+table+'</div>';
+    $('timetable-week').innerHTML='<p class="tt-guide">프로그램을 누르면 시간과 내용을 고칠 수 있습니다. '+e(T.basicNote)+'</p>'+message(T.conflicts(state))+'<div class="tt-week-scroll">'+grid(state.blocks,[0,1,2,3,4],T.bounds(state))+'</div><details class="tt-table-details"><summary>주간표를 표로 보기</summary><div class="tt-week-scroll">'+table+'</div></details><div class="tt-print-table">'+table+'</div>';
   }
   function editor(block){
     const current=block||{day:selectedDay,start:'',end:'',name:'',detail:''};
@@ -45,7 +45,7 @@
   function renderDay(){
     if(!$('timetable-day'))return;
     const blocks=T.dayBlocks(state,selectedDay),block=state.blocks.find(b=>b.id===selectedId);
-    $('timetable-day').innerHTML='<div class="tt-day-toolbar"><label>요일<select id="tt-day-choice">'+T.weekdays.map((day,index)=>'<option value="'+index+'" '+(selectedDay===index?'selected':'')+'>'+day+'</option>').join('')+'</select></label><span>'+blocks.length+'개 일정 · '+blocks.reduce((sum,b)=>sum+T.minutes(b.end)-T.minutes(b.start),0)+'분</span></div>'+message(T.conflicts(state).filter(c=>c.day===selectedDay))+'<div class="tt-day-layout"><div class="tt-day-scroll">'+grid(blocks,[selectedDay],T.bounds(state,selectedDay))+'</div>'+editor(block)+'</div>';
+    $('timetable-day').innerHTML='<div class="tt-day-toolbar"><label>요일<select id="tt-day-choice">'+T.weekdays.map((day,index)=>'<option value="'+index+'" '+(selectedDay===index?'selected':'')+'>'+day+'</option>').join('')+'</select></label><span>'+blocks.length+'개 일정 · '+blocks.reduce((sum,b)=>sum+T.minutes(b.end)-T.minutes(b.start),0)+'분</span></div><p class="tt-guide">'+e(T.basicNote)+'</p>'+message(T.conflicts(state).filter(c=>c.day===selectedDay))+'<div class="tt-day-layout"><div class="tt-day-scroll">'+grid(blocks,[selectedDay],T.bounds(state,selectedDay))+'</div>'+editor(block)+'</div>';
     updateDuration();
   }
   function updateDuration(){
