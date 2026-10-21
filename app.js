@@ -38,6 +38,9 @@
       document.querySelectorAll('[role="tabpanel"]').forEach(panel=>{panel.hidden=panel.getAttribute('aria-labelledby')!==id;});
       document.querySelector('.chosen').hidden=!['programs-tab','day-tab'].includes(id);
       document.getElementById('view-day').hidden=id==='day-tab';
+      document.querySelector('.entry-actions').hidden=id==='intro-tab';
+      document.getElementById('planning-note').hidden=!['builder-tab','day-tab','week-tab','month-tab','operations-tab','calendar-tab'].includes(id);
+      document.querySelector('footer').hidden=id==='intro-tab';
     }
     function choices(items,group,selected) {
       return items.map(item=>'<label class="choice"><input type="radio" name="'+group+'" value="'+item.id+'" '+(item.id===selected?'checked':'')+'><span><strong>'+e(item.name)+'</strong><small>'+e(item.detail)+'</small>'+(group==='class'?'<small>'+e(item.mode)+'</small><small class="pending-state">대상·참여 조건 협의 중</small>':'')+'</span></label>').join('');
@@ -158,6 +161,10 @@
       tab.addEventListener('click',()=>showTab(tab.id));
       tab.addEventListener('keydown',event=>{const next={ArrowRight:(index+1)%tabs.length,ArrowLeft:(index+tabs.length-1)%tabs.length,Home:0,End:tabs.length-1}[event.key];if(next===undefined)return;event.preventDefault();tabs[next].focus();showTab(tabs[next].id);});
     });
+    document.querySelectorAll('[data-tab-target]').forEach(button=>button.addEventListener('click',()=>{
+      showTab(button.dataset.tabTarget);
+      document.getElementById(button.dataset.tabTarget).focus();
+    }));
     document.querySelectorAll('input[name="class"],input[name="focus"]').forEach(input=>input.addEventListener('change',()=>{
       if(input.name==='class'){selectedClass=input.value;selectedSlot='';updateDays();}else selectedFocus=input.value;
       updatePersonal();
@@ -177,6 +184,6 @@
     document.getElementById('calendar-prev').addEventListener('click',()=>{if(calendarMonth>0){calendarMonth--;renderCalendar();}});
     document.getElementById('calendar-next').addEventListener('click',()=>{if(calendarMonth<S.calendarMonths.length-1){calendarMonth++;renderCalendar();}});
     document.getElementById('calendar-days').addEventListener('click',event=>{const button=event.target.closest('[data-calendar-date]');if(!button)return;calendarDate=button.dataset.calendarDate;document.querySelectorAll('[data-calendar-date]').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));renderCalendarDetail();});
-    updateDays();updatePersonal();renderWeek();renderBig3();renderOperations();renderRoster();renderCalendar();showTab('builder-tab');
+    updateDays();updatePersonal();renderWeek();renderBig3();renderOperations();renderRoster();renderCalendar();showTab('intro-tab');
   }
 }

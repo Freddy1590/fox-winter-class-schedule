@@ -1,7 +1,7 @@
 'use strict';
 {
   const classes = [
-    {id:'dis',name:'분해클래스',detail:'안전·공구 익히기, 분해·관찰·재구성',mode:'진행 방식·참여 조건 협의 중'},
+    {id:'dis',name:'분해클래스',detail:'발견한 것을 나누고, 함께 새 쓰임과 이야기를 만드는 협력 프로젝트',mode:'방학클래스에 함께하는 프로젝트 · 단독 참여 가능 · 세부 편성 협의 중'},
     {id:'ai',name:'AI 클래스',detail:'생성형 AI 등으로 표현하고 만들기',mode:'매회 체험 / 이어가는 프로젝트'},
     {id:'sel',name:'SEL 클래스',detail:'감정카드·감정 표현, 글과 그림으로 책 만들기',mode:'이어가는 프로젝트 · 감정 표현을 책으로 모으기'},
     {id:'art',name:'Priscilla 영어·미술 클래스',detail:'표현 익히기, 협동 미술, 영어로 소개하기',mode:'체험·프로젝트 편성 협의 중'},
@@ -9,9 +9,9 @@
     {id:'cook',name:'요리·베이킹 클래스',detail:'함께 만들고 순서와 역할 나누기',mode:'매회 체험 · 세부 진행 협의 중'}
   ];
   const focus = [
-    {id:'both',name:'영어 + 수학 집중타임',detail:'영어와 수학을 나누어 이어가기'},
-    {id:'english',name:'영어 집중타임',detail:'영어만 선택 · 어휘·읽기·쓰기'},
-    {id:'math',name:'수학 집중타임',detail:'수학만 선택 · 예습 또는 복습'},
+    {id:'both',name:'영어 + 수학 집중타임',detail:'스스로 공부하고, 서로 설명하고 질문하며 함께 이해 넓히기'},
+    {id:'english',name:'영어 집중타임',detail:'배운 표현을 나누고 서로 설명하기 · 어휘·읽기·쓰기'},
+    {id:'math',name:'수학 집중타임',detail:'풀이를 설명하고 친구의 질문으로 생각 다듬기 · 예습 또는 복습'},
     {id:'deep',name:'AI 심화 클래스',detail:'AI를 더 깊이 공부하고 작업 이어가기'},
     {id:'reading',name:'독서 집중타임',detail:'책을 읽고 생각 정리하기'},
     {id:'work',name:'개별 작업 집중타임',detail:'이어 하던 작업에 조용히 몰입하기'}

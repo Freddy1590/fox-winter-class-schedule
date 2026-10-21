@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
-  <meta name="description" content="FOX 방학클래스 프로그램과 하루·주간·월간 일정">
+  <meta name="description" content="Together, we are stronger and smarter. 함께 생각하고, 서로 배우는 FOX 겨울방학클래스.">
   <meta name="theme-color" content="#2f6046">
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="./style.css">
@@ -12,14 +12,15 @@
   <script src="./student-plan.js" defer></script>
   <script src="./app.js" defer></script>
   <script src="./planner-ui.js" defer></script>
-  <title>방학클래스 · FOX LC</title>
+  <title>Together, we are stronger and smarter. · FOX 겨울방학클래스</title>
 </head>
 <body>
-<a class="skip-link" href="#main">프로그램으로 바로 가기</a>
+<a class="skip-link" href="#main">본문으로 바로 가기</a>
 <main id="main">
-  <header><div><h1>방학클래스</h1><p>아이별 주간표를 만들고, 전체 프로그램의 시간·담당·편성 상태를 확인합니다.</p></div><span class="status">운영 편성안</span></header>
+  <header class="site-header"><p class="site-brand"><strong>FOX LC</strong><span>겨울방학클래스</span></p></header>
   <nav class="tabs" role="tablist" aria-label="방학클래스 보기">
-    <button type="button" role="tab" id="builder-tab" aria-controls="builder" aria-selected="true">아이별 Big 3</button>
+    <button type="button" role="tab" id="intro-tab" aria-controls="intro" aria-selected="true">이번 방학클래스</button>
+    <button type="button" role="tab" id="builder-tab" aria-controls="builder" aria-selected="false" tabindex="-1">아이별 Big 3</button>
     <button type="button" role="tab" id="programs-tab" aria-controls="programs" aria-selected="false" tabindex="-1">프로그램</button>
     <button type="button" role="tab" id="day-tab" aria-controls="day" aria-selected="false" tabindex="-1">하루 일정</button>
     <button type="button" role="tab" id="week-tab" aria-controls="week" aria-selected="false" tabindex="-1">주간</button>
@@ -27,9 +28,33 @@
     <button type="button" role="tab" id="operations-tab" aria-controls="operations" aria-selected="false" tabindex="-1">운영·담당</button>
     <button type="button" role="tab" id="calendar-tab" aria-controls="calendar" aria-selected="false" tabindex="-1">달력</button>
   </nav>
-  <div class="entry-actions"><button type="button" class="primary" id="open-builder">아이별 Big 3 구성</button><button type="button" class="secondary" id="open-overview">전체 프로그램·운영 보기</button></div>
-  <div class="chosen"><div><span class="text-small">프로그램 탐색용 하루 예시</span><output id="chosen" aria-live="polite"></output></div><button type="button" class="primary" id="view-day">하루 일정 보기 <span aria-hidden="true">→</span></button></div>
-  <section id="builder" role="tabpanel" aria-labelledby="builder-tab">
+  <div class="entry-actions" hidden><button type="button" class="primary" id="open-builder">아이별 Big 3 구성</button><button type="button" class="secondary" id="open-overview">전체 프로그램·운영 보기</button></div>
+  <div class="chosen" hidden><div><span class="text-small">프로그램 탐색용 하루 예시</span><output id="chosen" aria-live="polite"></output></div><button type="button" class="primary" id="view-day">하루 일정 보기 <span aria-hidden="true">→</span></button></div>
+  <p id="planning-note" class="caption" hidden>이전 시간표를 바탕으로 한 편성 예시입니다. 새 참여 기준과 시간은 조정 중입니다.</p>
+  <section id="intro" role="tabpanel" aria-labelledby="intro-tab">
+    <div class="intro-hero">
+      <h1 lang="en"><span>Together, we are</span> <span>stronger and smarter.</span></h1>
+      <p class="intro-lead">함께 생각하고,<br>서로 배우는 겨울방학.</p>
+      <p class="intro-description">물건을 분해하며 발견을 나누고, 함께 만들 것을 정합니다.<br class="intro-wide-break"> 영어·수학에서는 서로 설명하고 질문하며 배웁니다.</p>
+      <div class="intro-actions"><button type="button" class="primary" data-tab-target="programs-tab">프로그램 살펴보기 <span aria-hidden="true">→</span></button><button type="button" class="secondary" data-tab-target="builder-tab">아이별 주간표 구성</button></div>
+    </div>
+    <div class="intro-experiences">
+      <article class="intro-experience intro-collaboration">
+        <div class="intro-experience-heading"><h2>분해 프로젝트</h2><p>발견에서<br> 공동의 이야기로</p></div>
+        <div class="intro-experience-body"><p>물건을 살펴보고 분해하며 각자 발견한 것을 나눕니다. 함께 만들 것을 정해 새로운 쓰임과 이야기로 이어갑니다.</p><p class="intro-experience-point">무엇을 만들었는지와 함께,<br>어떻게 함께 만들었는지를 나눕니다.</p>
+          <ol class="intro-flow" aria-label="분해 프로젝트의 흐름"><li>관찰·발견</li><li>생각 나누기</li><li>함께 선택·제작</li><li>과정·이야기 나누기</li></ol>
+        </div>
+      </article>
+      <article class="intro-experience intro-learning">
+        <div class="intro-experience-heading"><h2>매일 몰입</h2><p>내 배움을<br> 서로의 배움으로</p></div>
+        <div class="intro-experience-body"><p>스스로 공부한 내용을 서로 설명하고 질문합니다. 친구의 생각을 듣고 내 풀이와 설명을 다시 다듬습니다.</p><p class="intro-experience-point">내가 아는 것을 설명하고,<br>친구의 생각에서 다시 배웁니다.</p>
+          <ol class="intro-flow" aria-label="매일 몰입의 흐름"><li>스스로 공부</li><li>서로 설명·질문</li><li>생각 다듬어 공유</li></ol>
+        </div>
+      </article>
+    </div>
+    <div class="intro-continuity"><h2>이어가는 배움,<br> 함께 넓히는 경험</h2><p>기존 베이직의 학습을 이어가며 AI·SEL·영어미술 등 다양한 활동을 만납니다. 함께 발견하고, 설명하고, 만들어 가는 경험을 한 주 안에 연결합니다.</p></div>
+  </section>
+  <section id="builder" role="tabpanel" aria-labelledby="builder-tab" hidden>
     <h2>아이별 Big 3 구성</h2><p class="caption">아이의 희망 조건을 입력한 뒤, 가능한 시간에 참여할 클래스를 골라 주세요. 신청 전 편성안이며 새로고침하면 입력이 지워집니다.</p>
     <form id="student-form" novalidate>
       <fieldset><legend>아이 기본정보</legend><div class="planner-fields">
@@ -42,7 +67,7 @@
       <fieldset><legend>Big 3에 넣을 활동</legend>
         <label class="check-option"><input id="student-dis" type="checkbox">분해클래스 포함 · 금요일 오전·오후 중 1회, 참여 시간 협의 중</label>
         <label class="planner-focus">매일 집중 방식<select id="student-focus" aria-describedby="focus-guide"><option value="">선택해 주세요</option></select></label>
-        <p class="caption" id="focus-guide">집중타임은 공동 운영시간이며, 영어만·수학만 선택할 때의 활동 시간 배분은 협의 중입니다.</p>
+        <p class="caption" id="focus-guide">영어·수학에 함께 참여하는 방향입니다. 아래 시간·선택은 이전 편성 예시이며, 반일 참여와 실제 편성은 조정 중입니다.</p>
         <p class="field-label">원하는 클래스 · 여러 개 선택 가능</p><div id="student-preferences" class="planner-preferences"></div>
         <p class="caption">학년별 대상·참여 조건은 협의 중입니다. 같은 시간에 원하는 활동이 겹치면 아래 주간표에서 하나를 고릅니다.</p>
       </fieldset>
@@ -59,12 +84,12 @@
       <p class="caption">반복 주간 편성안입니다. 날짜별 특별 일정은 달력에서 확인합니다. 메인 역할 확인과 실제 시간별 근무 확정은 별도입니다. 당번·공간·인원·연구원 휴식은 현재 미확정 상태를 유지합니다.</p>
     </div>
   </section>
-  <section id="programs" role="tabpanel" aria-labelledby="programs-tab">
+  <section id="programs" role="tabpanel" aria-labelledby="programs-tab" hidden>
     <div class="recommendation"><h2>Big 3를 한 아이의 한 주로</h2><p>분해클래스 + 매일 집중타임 + 좋아하는 클래스</p><p class="caption">초등 저학년 참여 예시: SEL을 선호하는 학생의 한 주와 감정 표현을 책으로 모으는 한 달을 살펴보세요.</p><button type="button" class="text-button" id="view-big3-week">Big 3 주간 참여 예시 보기 →</button></div>
     <button type="button" class="text-button operations-link" id="view-operations">센터 하루 운영·담당·휴식 보기 →</button>
     <button type="button" class="text-button" id="view-program-roster">전체 프로그램·담당표 보기 →</button>
     <fieldset><legend>1. 살펴볼 클래스</legend><p class="caption">선택한 클래스가 있는 하루를 미리 봅니다. 유아·초등 저학년·고학년별 대상과 참여 조건은 협의 중입니다.</p><div class="choices" id="class-choices"></div></fieldset>
-    <fieldset><legend>2. 집중타임</legend><p class="caption">집중 활동은 신청 시 학부모가 정하며, 선택한 활동을 매일 이어갑니다. 아래 선택은 개인 참여 미리보기입니다.</p><div class="choices focus-choices" id="focus-choices"></div></fieldset>
+    <fieldset><legend>2. 집중타임</legend><p class="caption">영어·수학을 공부하고, 서로 설명하고 질문하며 배움을 이어갑니다. 아래 선택은 활동을 살펴보는 이전 편성 예시입니다.</p><div class="choices focus-choices" id="focus-choices"></div></fieldset>
     <h2>함께하는 활동</h2><div class="program-list" id="shared-programs"></div>
     <h2>특별 프로그램</h2><p class="caption">프로그램을 누르면 월간 일정에서 볼 수 있습니다. 운영 여부·날짜·참여 방법은 추후 안내합니다.</p><div class="program-list events" id="event-programs"></div>
     <h2>추후 안내 활동</h2><div class="program-list" id="future-programs"></div>
@@ -87,8 +112,8 @@
     <div class="block-key"><span class="fixed-time">고정 공동시간</span><span class="class-time">요일 클래스</span><span class="open-time">상시 개별활동</span><span class="special-time">특별 프로그램</span></div>
     <p class="mobile-hint">표를 좌우로 밀어 요일을 확인하세요.</p>
     <div class="table-scroll"><table class="weekly"><caption class="sr-only">월요일부터 금요일까지 프로그램</caption><thead><tr><th scope="col">시간</th><th scope="col">월</th><th scope="col">화</th><th scope="col">수</th><th scope="col">목</th><th scope="col">금</th></tr></thead><tbody id="weekly-rows"></tbody></table></div>
-    <p class="caption">영어 말하기는 영어 활동과 이어집니다. 틈새 체육활동은 참여 시간 협의 중입니다. 금요일 분해클래스는 오전·오후 중 1회 참여하는 편성안입니다. 집중타임은 공동 운영시간이며, 영어만·수학만 선택할 때의 활동 시간 배분은 협의 중입니다.</p>
-    <h2 id="big3-heading" tabindex="-1">Big 3 · 한 학생의 주간 참여 예시</h2><p class="caption">SEL을 선호하고 주 5일 참여하는 초등 저학년 학생을 가정했습니다. 운영 확정 전 예시입니다. 집중 활동은 신청 시 학부모가 선택하며, 여기서는 영어+수학을 선택한 경우입니다.</p><div class="table-scroll"><table class="big3-table"><thead><tr><th scope="col">요일</th><th scope="col">선택한 클래스</th><th scope="col">매일 집중시간</th><th scope="col">미선택·협의 사항</th></tr></thead><tbody id="big3-rows"></tbody></table></div><p class="caption">금요일 분해는 오전·오후 중 1회, 참여 시간 협의 중입니다. 나머지 반일은 자동 배정하지 않습니다.</p><button type="button" class="text-button" id="view-sel-month">이 학생의 SEL 월간 진행 예시 보기 →</button>
+    <p class="caption">영어 말하기는 영어 활동과 이어집니다. 틈새 체육활동은 참여 시간 협의 중입니다. 금요일 분해클래스는 오전·오후 중 1회 참여하는 편성안입니다. 영어·수학에 함께 참여하는 방향입니다. 아래 시간·선택은 이전 편성 예시이며, 반일 참여와 실제 편성은 조정 중입니다.</p>
+    <h2 id="big3-heading" tabindex="-1">Big 3 · 한 학생의 주간 참여 예시</h2><p class="caption">SEL을 선호하고 주 5일 참여하는 초등 저학년 학생을 가정했습니다. 이전 시간표를 바탕으로 한 참여 예시입니다. 여기서는 영어+수학을 함께 살펴보며, 새 시간과 반일 참여 기준은 조정 중입니다.</p><div class="table-scroll"><table class="big3-table"><thead><tr><th scope="col">요일</th><th scope="col">선택한 클래스</th><th scope="col">매일 집중시간</th><th scope="col">미선택·협의 사항</th></tr></thead><tbody id="big3-rows"></tbody></table></div><p class="caption">금요일 분해는 오전·오후 중 1회, 참여 시간 협의 중입니다. 나머지 반일은 자동 배정하지 않습니다.</p><button type="button" class="text-button" id="view-sel-month">이 학생의 SEL 월간 진행 예시 보기 →</button>
   </section>
   <section id="month" role="tabpanel" aria-labelledby="month-tab" hidden>
     <h2>방학의 일정</h2>
