@@ -56,14 +56,19 @@
     }).join('');
     $('student-basic-summary').innerHTML='<h3>기존 베이직 편성</h3>'+(plan.basics.length?'<dl class="preference-summary"><div><dt>시간 편성안</dt><dd>'+ (plan.scheduledBasics.map(b=>basicLabel(b)+' · 담당 '+e(b.owner?b.owner+' 입력안':'미확정')).join('<br>')||'없음')+'</dd></div><div><dt>미편성·조정 필요</dt><dd>'+(plan.pendingBasics.map(b=>basicLabel(b)+'<small class="plan-problem">'+e(b.problems.join(' / '))+'</small>').join('<br>')||'없음')+'</dd></div></dl>':'<p class="caption">입력된 베이직 없음</p>');
     const first=plan.issues.slice(0,4),rest=plan.issues.slice(4);
-    $('student-messages').innerHTML=plan.issues.length?'<p><strong>편성 전 확인할 사항</strong></p><ul>'+first.map(t=>'<li>'+e(t)+'</li>').join('')+'</ul>'+(rest.length?'<details><summary>추가 확인 '+rest.length+'건</summary><ul>'+rest.map(t=>'<li>'+e(t)+'</li>').join('')+'</ul></details>':''):'<p>선택한 조건으로 가능한 시간입니다. 베이직·Big 3와 협의 사항을 확인해 주세요.</p>';
+    const restItems=rest.map(t=>'<li>'+e(t)+'</li>').join('');
+    $('student-messages').innerHTML=plan.issues.length?'<p><strong>편성 전 확인할 사항</strong></p><ul>'+first.map(t=>'<li>'+e(t)+'</li>').join('')+'</ul>'+(rest.length?'<details><summary>추가 확인 '+rest.length+'건</summary><ul>'+restItems+'</ul></details><ul class="print-issues">'+restItems+'</ul>':''):'<p>선택한 조건으로 가능한 시간입니다. 베이직·Big 3와 협의 사항을 확인해 주세요.</p>';
     $('student-week-rows').innerHTML=plan.rows.map(day=>{
       const basics=plan.basics.filter(b=>b.day===day.day).map(basicCard).join('')||'<span class="caption">입력된 베이직 없음</span>';
       if(!day.active)return '<tr role="row" class="non-participation"><th scope="row" role="rowheader">'+day.dayName+'</th><td role="cell" data-label="기존 베이직" class="open-time">'+basics+'</td><td role="cell" colspan="4">참여요일 미선택</td></tr>';
       const focus=day.blocks.filter(b=>b.key.startsWith('focus')).map(b=>focusCell(b,c.focus)).join('');
-      const shared=day.blocks.filter(b=>['lunch','stretch','break'].includes(b.key)&&(b.fits||b.conflicts.length)).map(b=>'<span>'+e(b.time)+' '+e(b.label)+(b.problem?'<small class="plan-problem">'+e(b.problem)+'</small>':'')+'</span>').join('');
+      const shared=day.blocks.filter(b=>['lunch','stretch','break'].includes(b.key)&&(b.overlaps||b.conflicts.length)).map(b=>{
+        const [start,end]=b.time.match(/\d{2}:\d{2}/g);
+        const partial=b.fits?'':'<small class="plan-problem">희망 구간 '+e(day.start>P.minutes(start)?day.startText:start)+'–'+e(day.end<P.minutes(end)?day.endText:end)+' · 부분 참여 협의 필요</small>';
+        return '<span>'+e(b.time)+' '+e(b.label)+partial+(b.problem?'<small class="plan-problem">'+e(b.problem)+'</small>':'')+'</span>';
+      }).join('');
       const needs=[day.start!==null&&day.start<600?'오전 생활지원·운영시간 협의':'',day.end!==null&&day.end>1050?'오후 생활지원·운영시간 협의':''].filter(Boolean).map(e).join('<br>');
-      return '<tr role="row"><th scope="row" role="rowheader">'+day.dayName+'<small>'+e(day.validTime?day.startText+'–'+day.endText:'등하원 시간 미확정')+'</small></th><td role="cell" data-label="기존 베이직" class="open-time">'+basics+'</td><td role="cell" data-label="오전 클래스" class="class-time">'+choiceCell(day,day.blocks.find(b=>b.key==='am'))+'</td><td role="cell" data-label="매일 집중타임" class="fixed-time">'+focus+'</td><td role="cell" data-label="오후 클래스" class="class-time">'+choiceCell(day,day.blocks.find(b=>b.key==='pm'))+'</td><td role="cell" data-label="공동시간·확인 사항">'+(shared||'공동시간 전체 참여 없음')+(needs?'<small class="plan-problem">'+needs+'</small>':'')+'</td></tr>';
+      return '<tr role="row"><th scope="row" role="rowheader">'+day.dayName+'<small>'+e(day.validTime?day.startText+'–'+day.endText:'등하원 시간 미확정')+'</small></th><td role="cell" data-label="기존 베이직" class="open-time">'+basics+'</td><td role="cell" data-label="오전 클래스" class="class-time">'+choiceCell(day,day.blocks.find(b=>b.key==='am'))+'</td><td role="cell" data-label="매일 집중타임" class="fixed-time">'+focus+'</td><td role="cell" data-label="오후 클래스" class="class-time">'+choiceCell(day,day.blocks.find(b=>b.key==='pm'))+'</td><td role="cell" data-label="공동시간·확인 사항">'+(shared||(day.validTime?'희망시간에 포함되는 공동시간 없음':'등하원 시간 확인 필요'))+(needs?'<small class="plan-problem">'+needs+'</small>':'')+'</td></tr>';
     }).join('');
     $('student-member-note').hidden=!$('student-member').checked;
     $('student-live-status').textContent='개인 주간 편성안 갱신. 확인 사항 '+plan.issues.length+'건. 모든 일정은 편성안입니다.';

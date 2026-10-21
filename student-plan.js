@@ -54,7 +54,7 @@
       }
       const timed=problems.length===0;
       if(!name)problems.push('프로그램명 미입력');
-      return {index,name,label:name||'베이직 '+(index+1)+' · 이름 미입력',owner,day,dayName:day===null?'요일 미확정':S.weekdays[day],start,end,startText:item.start||'',endText:item.end||'',time:!item.start&&!item.end?'시간 미확정':(item.start||'시작 미확정')+'–'+(item.end||'종료 미확정'),timed,problems,conflicts:[]};
+      return {index,name,label:name||'베이직 '+(index+1)+' · 이름 미입력',owner,day,dayName:day===null?'요일 미확정':S.weekdays[day],start,end,validTime,startText:item.start||'',endText:item.end||'',time:!item.start&&!item.end?'시간 미확정':(item.start||'시작 미확정')+'–'+(item.end||'종료 미확정'),timed,problems,conflicts:[]};
     });
     for(const basic of basics.filter(item=>item.timed))for(const block of rows[basic.day].blocks) {
       const shared=['lunch','stretch','break'].includes(block.key);
@@ -66,7 +66,7 @@
     }
     for(let i=0;i<basics.length;i++)for(let j=i+1;j<basics.length;j++) {
       const a=basics[i],b=basics[j];
-      if(a.timed&&b.timed&&a.day===b.day&&intersects([a.start,a.end],[b.start,b.end])) {
+      if(a.validTime&&b.validTime&&a.day!==null&&a.day===b.day&&intersects([a.start,a.end],[b.start,b.end])) {
         a.conflicts.push(b.label+' '+b.time);b.conflicts.push(a.label+' '+a.time);
       }
     }
