@@ -36,7 +36,7 @@
     for(const block of [...state.blocks].sort((a,b)=>a.day-b.day||T.minutes(a.start)-T.minutes(b.start))){
       if(!groups.has(block.name))groups.set(block.name,[]);groups.get(block.name).push(block);
     }
-    $('current-program-rows').innerHTML=[...groups].map(([name,blocks])=>'<tr><th scope="row">'+e(name)+'</th><td>'+blocks.map(b=>'<span class="roster-session">'+e(T.weekdays[b.day]+' '+b.start+'–'+b.end)+'</span>').join('')+'</td><td>'+e([...new Set(blocks.map(b=>T.description(b)).filter(Boolean))].join(' / ')||'내용 미입력')+'</td><td>'+ (blocks.some(b=>conflicts.has(b.id))?'시간 겹침 · 조정 필요':'시간표 입력됨')+'</td></tr>').join('')||'<tr><td colspan="4">입력된 일정이 없습니다.</td></tr>';
+    $('current-program-rows').innerHTML=[...groups].map(([name,blocks])=>'<tr><th scope="row">'+e(name)+'</th><td data-label="요일·시간">'+T.sessionLabels(blocks).map(label=>'<span class="roster-session">'+e(label)+'</span>').join('')+'</td><td data-label="내용">'+e([...new Set(blocks.map(b=>T.description(b)).filter(Boolean))].join(' / ')||'내용 미입력')+'</td><td data-label="편성 상태">'+ (blocks.some(b=>conflicts.has(b.id))?'시간 겹침 · 조정 필요':'시간표 입력됨')+'</td></tr>').join('')||'<tr><td colspan="4">입력된 일정이 없습니다.</td></tr>';
   }
   let selectedDate='2027-01-04';
   function renderCalendarDetail(){
@@ -57,7 +57,7 @@
         const date=month+'-'+String(n).padStart(2,'0'),weekday=cell%7,holiday=S.holidays[date],blocks=date>='2027-01-04'&&weekday>0&&weekday<6&&!holiday?T.dayBlocks(state,weekday-1):[];
         const special=blocks.filter(b=>!T.createDefault().blocks.some(seed=>seed.id===b.id&&['아침 간식·플래너 작성','자율학습','수학 몰입','베이직 활동','점심시간','튼튼 부스터','영어 몰입','간식'].includes(seed.name)&&seed.name===b.name));
         const summary=[...new Set(special.map(b=>b.name))].join(' · ')||(blocks.length?blocks.length+'개 일정':'');
-        rows+='<td><button type="button" data-current-date="'+date+'" aria-pressed="'+(date===selectedDate)+'" aria-label="'+e(date+(holiday?' '+holiday:summary?' '+summary:''))+'"><strong>'+n+'</strong><span>'+e(holiday||summary)+'</span></button></td>';
+        rows+='<td><button type="button" class="'+(holiday?'is-holiday':'')+'" data-current-date="'+date+'" aria-pressed="'+(date===selectedDate)+'" aria-label="'+e(date+(holiday?' '+holiday:summary?' '+summary:''))+'"><strong>'+n+'</strong><span class="current-calendar-summary">'+e(holiday||summary)+'</span>'+(!holiday&&blocks.length?'<span class="current-calendar-mobile-count" aria-hidden="true">'+blocks.length+'개</span>':'')+'</button></td>';
       }
       if(cell%7===6)rows+='</tr>';
     }

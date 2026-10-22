@@ -73,11 +73,20 @@
     const blocks=day===undefined?state.blocks:dayBlocks(state,day);
     return {start:Math.min(540,...blocks.map(b=>minutes(b.start))),end:Math.max(1140,...blocks.map(b=>minutes(b.end)))};
   }
+  function sessionLabels(blocks){
+    const groups=new Map();
+    for(const block of blocks){
+      const key=block.start+'–'+block.end;
+      if(!groups.has(key))groups.set(key,new Set());
+      groups.get(key).add(block.day);
+    }
+    return [...groups].sort(([a],[b])=>minutes(a.slice(0,5))-minutes(b.slice(0,5))).map(([time,days])=>[...days].sort((a,b)=>a-b).map(day=>weekdays[day].slice(0,1)).join('·')+' '+time);
+  }
   function rows(state){
     const points=[...new Set(state.blocks.flatMap(b=>[minutes(b.start),minutes(b.end)]))].sort((a,b)=>a-b);
     return points.slice(0,-1).map((start,index)=>({start:formatTime(start),end:formatTime(points[index+1]),cells:weekdays.map((_,day)=>dayBlocks(state,day).filter(b=>minutes(b.start)<points[index+1]&&minutes(b.end)>start))}));
   }
-  const api={weekdays,basicLabs,basicNote,isBasic,description,minutes,formatTime,createDefault,validate,checked,dayBlocks,upsert,remove,conflicts,bounds,rows};
+  const api={weekdays,basicLabs,basicNote,isBasic,description,minutes,formatTime,createDefault,validate,checked,dayBlocks,upsert,remove,conflicts,bounds,sessionLabels,rows};
   globalThis.WinterTimetable=api;
   if(typeof module!=='undefined')module.exports=api;
 }
